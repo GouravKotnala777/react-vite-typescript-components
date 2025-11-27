@@ -1,34 +1,29 @@
-import { useState } from "react"
-import Slider from "../components/Slider"
-
+import { useEffect, useRef, useState, type ReactNode } from "react"
+import './slider.css';
+import SliderDiagonalWithBtn from "../components/SliderDiagonalWithBtn.component";
 
 
 
 
 function Home() {
-    const [a, setA] = useState(false);
 
     return (
         <section>
             <h1 className="text-center text-4xl text-neutral-400">This is my Component</h1>
-            {/*<div className="border-2 border-neutral-400 m-10 flex flex-col h-screen">
-                <div className="border-2 border-neutral-400 h-[100px]">{a&&<Slider style="h-full" />}</div>
-                <div className="border-2 border-neutral-400 flex flex-1">
-                <div className="border-2 border-neutral-400 w-[200px]">{a&&<Slider style="h-full" />}</div>
-                <div className="border-2 border-neutral-400 flex flex-col flex-1">
-                    <div className="border-2 border-neutral-400 flex-1">{a&&<Slider style="h-full" />}</div>
-                    <div className="border-2 border-neutral-400 flex flex-1">
-                    <div className="border-2 border-neutral-400 w-[300px] h-[300px]">
-                        {a&&<Slider style="h-full" />}
-                    </div>
-                    <div className="border-2 border-neutral-400 flex-2">{a&&<Slider style="h-full" />}</div>
-                    </div>
-                </div>
-                </div>
-            </div>*/}
-            <div className="w-[400px] h-[350px] ml-40 mt-30">
+            <SliderDiagonalWithBtn
+                items={[
+                    <img src="vite.svg" alt="vite.svg1" className="bg-neutral-600 w-full h-full rounded-2xl" />,
+                    <img src="vite.svg" alt="vite.svg2" className="bg-neutral-600 w-full h-full rounded-2xl" />,
+                    <img src="vite.svg" alt="vite.svg3" className="bg-neutral-600 w-full h-full rounded-2xl" />,
+                    <img src="vite.svg" alt="vite.svg4" className="bg-neutral-600 w-full h-full rounded-2xl" />,
+                ]}
+                options={{
+                    height:"240px", width:"360px",
+                }}
+            />
+            {/*<div className="w-[400px] h-[350px] ml-40 mt-30">
                 <Slider style="h-full" btns={{inset:"30", size:"40"}} />
-            </div>
+            </div>*/}
         </section>
     )
 }
