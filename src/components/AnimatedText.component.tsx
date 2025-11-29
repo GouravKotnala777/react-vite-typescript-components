@@ -2,22 +2,26 @@ import { useEffect, useState } from "react";
 
 
 interface AnimatedTextPropTypes{
-    lines:string[];
+    textLines:string[];
     duration?:number;
+    fontSize?:string;
+    color?:string;
+    backgroundColor?:string;
+    fontFamily?:string;
 };
 
 
 
 
 
-function AnimatedText({lines, duration=1000}:AnimatedTextPropTypes) {
+function AnimatedText({textLines, duration=1000, fontSize="2rem", color="black", backgroundColor="transparent", fontFamily="sans-serif"}:AnimatedTextPropTypes) {
     const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
     const [step, setStep] = useState<number>(0);
     const [cloneLines, setCloneLines] = useState<string[]>([]);
 
 
     useEffect(() => {
-        setCloneLines([...lines, lines[0]]);        
+        setCloneLines([...textLines, textLines[0]]);        
     }, []);
 
     useEffect(() => {
@@ -37,7 +41,7 @@ function AnimatedText({lines, duration=1000}:AnimatedTextPropTypes) {
             const timer = setTimeout(() => {
                 setIsTransitionEnabled(true);
                 setStep(step+1);
-            }, 0);
+            }, 100);
             return() => {clearTimeout(timer)};
         }
     }, [step, cloneLines]);
@@ -60,7 +64,7 @@ function AnimatedText({lines, duration=1000}:AnimatedTextPropTypes) {
             >
               {
                 cloneLines.map((str, index) => (
-                  <p key={index} className="text-2xl text-white h-full">{str}</p>
+                  <p key={index} style={{fontSize, color, backgroundColor, fontFamily}} className="h-full">{str}</p>
                 ))
               }
             </div>
