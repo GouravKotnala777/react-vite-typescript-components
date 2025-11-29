@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, type ReactNode } from "react"
+import { useEffect, useRef, useState } from "react"
 import './slider.css';
 import AnimatedText from "../components/AnimatedText.component";
+import BorderedImage from "../components/BorderedImage.component";
 
 
 
@@ -11,9 +12,10 @@ function Home() {
       <section>
           <h1 className="text-center text-4xl text-neutral-400">This is my Component</h1>
 
-          <AnimatedText lines={["gourav", "naruto", "sasuke"]} />
-          <AnimatedText lines={["is", "is", "is"]} />
-          <AnimatedText lines={["good", "naive", "smart"]} />
+          {/*<AnimatedText textLines={["gourav", "naruto", "sasuke"]} color="white" duration={2000} />*/}
+
+          <BorderedImage imgURL="https://wallpapercave.com/wp/wp4511397.jpg" borderRadius="20px" thickness="1px" height="180px" width="250px" />
+
 
           {/*<SliderDiagonalWithBtn
               items={[
