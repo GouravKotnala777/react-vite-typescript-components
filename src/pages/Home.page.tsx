@@ -1,5 +1,5 @@
+import BorderGradientHorizontalAnimation from '../components/BorderGradientHorizontalAnimation.component';
 import './slider.css';
-import TextStaggered from '../components/TextStaggered.component';
 
 
 
@@ -14,9 +14,31 @@ function Home() {
 
           {/*<BorderedImage imgURL="https://wallpapercave.com/wp/wp4511397.jpg" borderRadius="20px" thickness="1px" height="180px" width="250px" />*/}
 
-          <div className="mt-30">
-            <TextStaggered text="Staggered Text" animationType="seventh" />
+          <div className="p-30 bg-black">
+            <BorderGradientHorizontalAnimation
+            thickness="4px"
+            child={
+              <div  className="p-2">
+                <h2 className="text-2xl mb-4">Hello Everyone</h2>
+                <p className="text-md">Hi, I'm Gourav Kotnala, a passionate MERN stack web developer from Faridabad, Haryana, India. I specialize in building dynamic and responsive applications.</p>
+              </div>
+            }
+            blur="1rem" isTranslucent={true} />
           </div>
+          <div className="p-30 bg-white">
+            <BorderGradientHorizontalAnimation
+            child={
+              <div  className="p-2">
+                <h2 className="text-2xl mb-4">Hello Everyone</h2>
+                <p className="text-md">Hi, I'm Gourav Kotnala, a passionate MERN stack web developer from Faridabad, Haryana, India. I specialize in building dynamic and responsive applications.</p>
+              </div>
+            }
+            blur="1rem" isTranslucent={true} />
+          </div>
+
+          {/*<div className="mt-30">
+            <TextStaggered text="Staggered Text" animationType="seventh" />
+          </div>*/}
           {/*<div className="mt-30">
             <TextStaggered animationType="first" />
           </div>
