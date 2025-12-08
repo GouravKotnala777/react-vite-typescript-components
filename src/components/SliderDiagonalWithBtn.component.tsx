@@ -47,14 +47,26 @@ function adjustWidthWithResize(screenWidth:number){
     else if (screenWidth < 710 && screenWidth >= 580) {
         return {height:240, width:350};
     }
-    else if (screenWidth < 580 && screenWidth >= 460) {
+    else if (screenWidth < 580 && screenWidth >= 522) {
         return {height:240, width:350};
     }
-    else if (screenWidth < 460 && screenWidth >= 360) {
+    else if (screenWidth < 522 && screenWidth >= 460) {
         return {height:240, width:350};
+    }
+    else if (screenWidth < 460 && screenWidth >= 410) {
+        return {height:240, width:330};
+    }
+    else if (screenWidth < 410 && screenWidth >= 350) {
+        return {height:240, width:280};
+    }
+    else if (screenWidth < 350 && screenWidth >= 300) {
+        return {height:240, width:250};
+    }
+    else if (screenWidth < 300 && screenWidth >= 250) {
+        return {height:240, width:250};
     }
     else {
-        return {height:240, width:310};
+        return {height:240, width:290};
     }
 };
 function adjustGapWithResize(screenWidth:number){
@@ -82,55 +94,73 @@ function adjustGapWithResize(screenWidth:number){
     else if (screenWidth < 710 && screenWidth >= 580) {
         return 100;
     }
-    else if (screenWidth < 580 && screenWidth >= 460) {
+    else if (screenWidth < 580 && screenWidth >= 522) {
         return 100;
     }
-    else if (screenWidth < 460 && screenWidth >= 360) {
+    else if (screenWidth < 522 && screenWidth >= 460) {
         return 100;
+    }
+    else if (screenWidth < 460 && screenWidth >= 410) {
+        return 120;
+    }
+    else if (screenWidth < 410 && screenWidth >= 350) {
+        return 170;
+    }
+    else if (screenWidth < 350 && screenWidth >= 300) {
+        return 200;
+    }
+    else if (screenWidth < 300 && screenWidth >= 250) {
+        return 200;
     }
     else {
-        return 140;
+        return 160;
     }
 };
 function adjustPaddingWithResize(screenWidth:number){
-    if (screenWidth >= 1320) {
-        return 37;
-    }
-    else if (screenWidth < 1320 && screenWidth >= 1200) {
-        return 37;
-    }
-    else if (screenWidth < 1212 && screenWidth >= 1080) {
-        return 35;
-    }
-    else if (screenWidth < 1080 && screenWidth >= 960) {
-        return 33;
-    }
-    else if (screenWidth < 960 && screenWidth >= 840) {
-        return 31;
-    }
-    else if (screenWidth < 840 && screenWidth >= 710) {
-        return 27;
-    }
-    else if (screenWidth < 710 && screenWidth >= 580) {
-        return 23;
-    }
-    else if (screenWidth < 580 && screenWidth >= 522) {
-        return 18;
-    }
-    else if (screenWidth < 522 && screenWidth >= 470) {
-        return 15;
-    }
-    else if (screenWidth < 470 && screenWidth >= 420) {
+    if (screenWidth >= 1420) {
         return 10;
     }
-    else if (screenWidth < 420 && screenWidth >= 380) {
+    else if (screenWidth < 1420 && screenWidth >= 1320) {
+        return 14;
+    }
+    else if (screenWidth < 1320 && screenWidth >= 1212) {
+        return 14;
+    }
+    else if (screenWidth < 1212 && screenWidth >= 1080) {
+        return 16;
+    }
+    else if (screenWidth < 1080 && screenWidth >= 960) {
+        return 18;
+    }
+    else if (screenWidth < 960 && screenWidth >= 840) {
+        return 20;
+    }
+    else if (screenWidth < 840 && screenWidth >= 710) {
+        return 24;
+    }
+    else if (screenWidth < 710 && screenWidth >= 580) {
+        return 19;
+    }
+    else if (screenWidth < 580 && screenWidth >= 522) {
+        return 16;
+    }
+    else if (screenWidth < 522 && screenWidth >= 460) {
+        return 12;
+    }
+    else if (screenWidth < 460 && screenWidth >= 410) {
+        return 9;
+    }
+    else if (screenWidth < 410 && screenWidth >= 350) {
+        return 8;
+    }
+    else if (screenWidth < 350 && screenWidth >= 300) {
         return 6;
     }
-    else if (screenWidth < 380 && screenWidth >= 320) {
-        return 2;
+    else if (screenWidth < 300 && screenWidth >= 250) {
+        return 6;
     }
     else {
-        return 1;
+        return 16;
     }
 };
 
@@ -249,7 +279,7 @@ function SliderDiagonalWithBtn({items, options, style}:SliderDiagonalPropTypes) 
     return(
       <>
         <section
-            className="bg-pink-100 overflow-hidden mt-10 py-4"
+            className="overflow-hidden mt-10 py-4"
         >
             <div
                 ref={parentRef}
@@ -274,19 +304,50 @@ function SliderDiagonalWithBtn({items, options, style}:SliderDiagonalPropTypes) 
             </div>
         </section>
 
-        <button className="w-[50px] h-[50px] bg-neutral-600 rounded-full text-white cursor-pointer hover:bg-neutral-500 z-20 mt-5 ml-auto block mr-5 "
-          onClick={handler}
-        >
-          <div className="flex rotate-30"
-            style={{
-              transform:isBtnTransitioning?"translateX(-100%)":"translateX(0%)",
-              transition:isBtnTransitioning?"ease-in-out 0.5s":"none"
-            }}
-          >
-            <img className="rotate-140" src="right-bottom-arrow2.svg" alt="right-bottom-arrow2" />
-            <img className="rotate-140" src="right-bottom-arrow2.svg" alt="right-bottom-arrow2" />
-          </div>
-        </button>
+        <div className="w-[50px] h-[50px] flex justify-center items-center rounded-full -rotate-45 overflow-hidden ml-auto">
+            <div className="w-[50%] h-full left-0 absolute bg-[conic-gradient(from_var(--gradient-angle),white_0deg_324deg,black_324deg_360deg)] dark:bg-[conic-gradient(from_var(--gradient-angle),black_0deg_324deg,white_324deg_360deg)]"
+                style={{
+                    animation:"rotation 3s ease-in-out infinite"
+                }}
+            ></div>
+            <div className="w-[50%] h-full right-0 absolute bg-[conic-gradient(from_var(--gradient-angle),white_0deg_324deg,black_324deg_360deg)] dark:bg-[conic-gradient(from_var(--gradient-angle),black_0deg_324deg,white_324deg_360deg)]"
+                style={{
+                    animation:"rotation 3s 0.2s ease-in-out reverse infinite"
+                }}
+            ></div>
+            <button className="m-px rounded-full cursor-pointer z-20 
+                bg-white dark:bg-transparent dark:backdrop-blur-3xl
+            overflow-hidden"
+            onClick={handler}
+            >
+            <div className="flex rotate-80"
+                style={{
+                transform:isBtnTransitioning?"translateX(-100%)":"translateX(0%)",
+                transition:isBtnTransitioning?"ease-in-out 0.5s":"none"
+                }}
+            >
+                <img className="rotate-140" src="right-bottom-arrow2.svg" alt="right-bottom-arrow2" />
+                <img className="rotate-140" src="right-bottom-arrow2.svg" alt="right-bottom-arrow2" />
+            </div>
+            </button>
+        </div>
+
+        <style>
+            {
+                `
+                @property --gradient-angle{
+                    syntax:"<angle>";
+                    initial-value:0deg;
+                    inherits:false;
+                }
+                
+                @keyframes rotation {
+                    from { --gradient-angle: 0deg; }
+                    to   { --gradient-angle: 360deg; }
+                }
+                `
+            }
+        </style>
       </>
     )
 };
