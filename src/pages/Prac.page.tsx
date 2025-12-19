@@ -2,13 +2,14 @@
 import "../index.css";
 import TextPanel, { CssSVG, ExpressSVG, GithubSVG, GlobeSVG, HtmlSVG, JavascriptSVG, LinkedInSVG, MongodbSVG, NodeSVG, ReactSVG, TypescriptSVG, VercelSVG } from "../components/TextPanel.component";
 import SliderDiagonalWithBtn from "../components/SliderDiagonalWithBtn.component";
+import { NavLink } from "react-router-dom";
 
 
 const PROJECTS = [
-    {url:"/ecommerce.jpg", name:"Ecommerce Web App", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit."},
-    {url:"/uber_clone.jpg", name:"Uber Clone", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit."},
-    {url:"/portfolio1.jpg", name:"Portfolio", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit."},
-    {url:"/acremate.jpg", name:"Acremate", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit."}
+    {url:"/ecommerce.jpg", name:"Ecommerce Web App", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit.", hostURL:"https://ecommerce-frontend-1.vercel.app"},
+    {url:"/uber_clone.jpg", name:"Uber Clone", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit.", hostURL:"https://ecommerce-frontend-1.vercel.app"},
+    {url:"/portfolio1.jpg", name:"Portfolio", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit.", hostURL:"https://ecommerce-frontend-1.vercel.app"},
+    {url:"/acremate.jpg", name:"Acremate", description:"Lorem, ipsum dolor sit amet consectetur adipisicing elit.", hostURL:"https://ecommerce-frontend-1.vercel.app"}
 ];
 
 function Prac() {
@@ -74,43 +75,19 @@ function Prac() {
                 <h2 className="text-lg font-semibold mt-10">Projects</h2>
                 <p className="tracking-normal leading-7 text-gray-600 dark:text-gray-200">My projects and work across different technologies and domains.</p>
                 <SliderDiagonalWithBtn items={
-                    PROJECTS.map(({url, name, description}) => (
-                        <div className="w-full flex flex-col border dark:border-gray-200 border-gray-600 p-2 rounded-md">
+                    PROJECTS.map(({url, name, description, hostURL}) => (
+                        <NavLink to={hostURL} className="w-full flex flex-col border dark:border-gray-200 border-gray-600 p-2 rounded-md">
                             <div className="h-[30%]"><img className="h-40 w-full rounded-md" src={url} alt={url} /></div>
                             <div>
-                                <h2 className="text-gray-700 dark:text-gray-100 text-lg font-bold">{name}</h2>
+                                <div className="flex justify-between items-center">
+                                    <div className="text-gray-700 dark:text-gray-100 text-lg font-bold">{name}</div>
+                                    <div>O</div>
+                                </div>
                                 <p className="text-gray-700 dark:text-gray-300 text-sm">{description}</p>
                             </div>
-                        </div>
+                        </NavLink>
                     ))
                 } />
-                <div>
-                    <div>
-                        <div>
-                            <img src="vite.svg" alt="vite.svg" className="w-full h-[300px]" />
-                        </div>
-                        <div className="flex justify-between text-lg font-semibold"><span>NotesBuddy</span> <div className="flex gap-3"><span>O</span><span>O</span></div></div>
-                        <p className="text-gray-500">A comprehensive study platform with notes, flashcards, quizzes, AI chatbot, and interactive learning tools</p>
-                        <div className="text-sm">Technologies</div>
-                        <div className="flex gap-4">
-                            <img src="vite.svg" alt="vite.svg" className="w-7 h-7" />
-                            <img src="vite.svg" alt="vite.svg" className="w-7 h-7" />
-                            <img src="vite.svg" alt="vite.svg" className="w-7 h-7" />
-                            <img src="vite.svg" alt="vite.svg" className="w-7 h-7" />
-                            <img src="vite.svg" alt="vite.svg" className="w-7 h-7" />
-                            <img src="vite.svg" alt="vite.svg" className="w-7 h-7" />
-                        </div>
-                        <div className="flex justify-between">
-                            <div className="flex items-center gap-1 bg-green-100 px-2 py-1 w-max rounded-md">
-                                <div className="w-2 h-2 bg-green-400 rounded-2xl animate-pulse"></div>
-                                <p className="text-xs text-gray-600">All Systems Operational</p>
-                            </div>
-                            <div>
-                                <a href="/single_project">View Details -&gt; </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div>
                 <h2 className="text-lg font-semibold mt-10">GitHub Activity</h2>
