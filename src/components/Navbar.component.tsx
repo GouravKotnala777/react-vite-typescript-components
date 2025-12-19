@@ -2,14 +2,17 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 interface NavbarPropTypes{
     navlinks:{icon:string; text:string;}[];
+    position?:"absolute"|"fixed"|"sticky";
+    top?:string;
     left?:string;
+    fontSize?:string;
     translateX?:string;
     padding?:string;
     previewGap?:string;
     borderRadius?:string;
 };
 
-function Navbar({navlinks, left="0px", translateX="0px", padding="0px 0px", previewGap="-48px", borderRadius="0px"}:NavbarPropTypes) {
+function Navbar({navlinks, position="fixed", top="0px", left="0px", fontSize="18px", translateX="0px", padding="0px 0px", previewGap="-48px", borderRadius="0px"}:NavbarPropTypes) {
     const[hoveringNav, setHoveringNav] = useState<{x:number; width:number; left:number;}>({x:0, width:0, left:0});
     const [hoveringNavText, setHoveringNavText] = useState<string>("");
     const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -52,8 +55,10 @@ function Navbar({navlinks, left="0px", translateX="0px", padding="0px 0px", prev
     
     return(
         <div
-            className="fixed text-gray-500 bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+            className="text-gray-500 bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
             style={{
+                fontSize,
+                position,
                 left, translate:translateX,
                 boxShadow:"0px 0px 8px 0.1px gray",
                 borderRadius
@@ -81,7 +86,7 @@ function Navbar({navlinks, left="0px", translateX="0px", padding="0px 0px", prev
                     >
                         {
                             navlinks.map(({icon, text}, index) => (
-                                <div key={index} className="transition-all ease duration-600 text-lg bg-gray-800 text-gray-200"
+                                <div key={index} className="transition-all ease duration-600 bg-gray-800 text-gray-200"
                                     style={{
                                         transform:hoveringNavText === text?"scale(1)":"scale(0.5)",
                                         filter:hoveringNavText === text?"blur(0)":"blur(7px)",
@@ -99,7 +104,7 @@ function Navbar({navlinks, left="0px", translateX="0px", padding="0px 0px", prev
                     className="flex overflow-hidden">
                     {
                         navlinks.map(({icon, text}, index) => (
-                            <div key={index} className="text-lg h-full cursor-pointer flex items-center relative transition-all ease-in-out duration-600 hover:bg-gray-800"
+                            <div key={index} className="h-full cursor-pointer flex items-center relative transition-all ease-in-out duration-600 hover:bg-gray-800"
                                 style={{
                                     padding,
                                     scale:(hoveringNavText === text)?1:0.9
