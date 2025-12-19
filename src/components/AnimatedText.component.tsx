@@ -5,16 +5,17 @@ interface AnimatedTextPropTypes{
     textLines:string[];
     duration?:number;
     fontSize?:string;
-    color?:string;
+    color?:string|string[];
     backgroundColor?:string;
     fontFamily?:string;
+    height:string;
 };
 
 
 
 
 
-function AnimatedText({textLines, duration=1000, fontSize="2rem", color="black", backgroundColor="transparent", fontFamily="sans-serif"}:AnimatedTextPropTypes) {
+function AnimatedText({textLines, duration=1000, fontSize="2rem", color="black", backgroundColor="transparent", fontFamily="sans-serif", height}:AnimatedTextPropTypes) {
     const [isTransitionEnabled, setIsTransitionEnabled] = useState(true);
     const [step, setStep] = useState<number>(0);
     const [cloneLines, setCloneLines] = useState<string[]>([]);
@@ -55,7 +56,11 @@ function AnimatedText({textLines, duration=1000, fontSize="2rem", color="black",
     };
     
     return(
-        <div className="w-max h-[50px] overflow-y-hidden">
+        <div className="w-max overflow-y-hidden"
+            style={{
+                height
+            }}
+        >
             <div className="h-full"
               style={{
                 transform:getTransformValue(),
@@ -64,7 +69,9 @@ function AnimatedText({textLines, duration=1000, fontSize="2rem", color="black",
             >
               {
                 cloneLines.map((str, index) => (
-                  <p key={index} style={{fontSize, color, backgroundColor, fontFamily}} className="h-full">{str}</p>
+                  <p key={index} style={{fontSize,
+                    color:(typeof color === "object")?color[index]:color,
+                    backgroundColor, fontFamily}} className="mt-px h-full flex justify-left items-center">{str}</p>
                 ))
               }
             </div>
