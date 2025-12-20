@@ -1,5 +1,7 @@
+import type { ReactNode } from "react";
 
 interface BorderGradientAnimationPropTypes{
+    child:ReactNode;
     width?:string;
     height?:string;
     thickness?:string;
@@ -7,10 +9,11 @@ interface BorderGradientAnimationPropTypes{
     blur?:string;
     backgroundColor?:string;
     gradient?:string[];
+    duration?:number;
 
 };
 
-function BorderGradientAnimation({height="100%", width="100%", thickness="1px", borderRadius="12px", blur="0px", backgroundColor="black", gradient=["#ff006e", "#8338ec", "#3b82f6", "#06ffa5", "#ffbe0b", "#ff006e"]}:BorderGradientAnimationPropTypes) {
+function BorderGradientAnimation({child, height="100%", width="100%", thickness="1px", borderRadius="12px", blur="0px", backgroundColor="black", gradient=["#ff006e", "#8338ec", "#3b82f6", "#06ffa5", "#ffbe0b", "#ff006e"], duration=1000}:BorderGradientAnimationPropTypes) {
 
     return (
         <div className="relative"
@@ -25,24 +28,18 @@ function BorderGradientAnimation({height="100%", width="100%", thickness="1px", 
                     borderRadius,
                     filter:`blur(${blur})`,
                     background: `conic-gradient(from var(--gradient-angle), ${gradient})`,
-                    animation: 'rotation 2s linear infinite',
+                    animation: `rotation ${duration/1000}s linear infinite`,
                 }}
             />
 
-            <div className="relative h-full w-full flex flex-col justify-center items-center"
+            <div className="absolute inset-0 overflow-hidden"
                 style={{
-                    borderRadius,
-                    backgroundColor
+                    backgroundColor,
+                    margin:thickness,
+                    borderRadius
                 }}
             >
-                <div className="w-20 h-20 bg-linear-to-br from-pink-500 to-violet-600 rounded-full shadow-2xl shadow-purple-500/50 flex items-center justify-center mb-6">
-                <span className="text-3xl">Star</span>
-                </div>
-                <h2 className="text-2xl font-bold text-white">Glowing Card</h2>
-                <p className="text-gray-400 mt-2">Smooth animated border using @property</p>
-                <button className="mt-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition">
-                Explore
-                </button>
+                {child}
             </div>
 
             <style>
