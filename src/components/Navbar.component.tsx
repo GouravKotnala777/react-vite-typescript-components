@@ -59,7 +59,7 @@ function Navbar({navlinks, position="fixed", top="0px", left="0px", fontSize="18
             style={{
                 fontSize,
                 position,
-                left, translate:translateX,
+                top, left, translate:translateX,
                 boxShadow:"0px 0px 8px 0.1px gray",
                 borderRadius
             }}
@@ -72,8 +72,8 @@ function Navbar({navlinks, position="fixed", top="0px", left="0px", fontSize="18
             >
                 <div className="rounded-sm absolute left-0 w-23 overflow-hidden transition-all ease-in-out duration-1000 border border-gray-500"
                     style={{
-                        translate:isVisible?`${(hoveringNav.x-parentDivX)}px`:`${(hoveringNav.x-parentDivX)}px`,
-                        width:isVisible?hoveringNav.width:hoveringNav.width,
+                        translate:`${(hoveringNav.x-parentDivX)}px`,
+                        width:hoveringNav.width,
                         opacity:isVisible?1:0,
                         top:previewGap,
                         borderRadius
@@ -85,7 +85,7 @@ function Navbar({navlinks, position="fixed", top="0px", left="0px", fontSize="18
                         }}
                     >
                         {
-                            navlinks.map(({icon, text}, index) => (
+                            navlinks.map(({text}, index) => (
                                 <div key={index} className="transition-all ease duration-600 bg-gray-800 text-gray-200"
                                     style={{
                                         transform:hoveringNavText === text?"scale(1)":"scale(0.5)",
