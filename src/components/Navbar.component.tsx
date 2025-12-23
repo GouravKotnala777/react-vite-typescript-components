@@ -2,17 +2,13 @@ import { useEffect, useRef, useState, type MouseEvent } from "react";
 
 interface NavbarPropTypes{
     navlinks:{icon:string; text:string;}[];
-    position?:"absolute"|"fixed"|"sticky";
-    top?:string;
-    left?:string;
     fontSize?:string;
-    translateX?:string;
     padding?:string;
     previewGap?:string;
     borderRadius?:string;
 };
 
-function Navbar({navlinks, position="fixed", top="0px", left="0px", fontSize="18px", translateX="0px", padding="0px 0px", previewGap="-48px", borderRadius="0px"}:NavbarPropTypes) {
+function Navbar({navlinks, fontSize="18px", padding="0px 0px", previewGap="-48px", borderRadius="0px"}:NavbarPropTypes) {
     const[hoveringNav, setHoveringNav] = useState<{x:number; width:number; left:number;}>({x:0, width:0, left:0});
     const [hoveringNavText, setHoveringNavText] = useState<string>("");
     const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -58,8 +54,6 @@ function Navbar({navlinks, position="fixed", top="0px", left="0px", fontSize="18
             className="text-gray-500 bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
             style={{
                 fontSize,
-                position,
-                top, left, translate:translateX,
                 boxShadow:"0px 0px 8px 0.1px gray",
                 borderRadius
             }}
