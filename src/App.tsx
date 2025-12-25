@@ -3,7 +3,7 @@ import Home from './pages/Home.page.tsx';
 import Prac from "./pages/Prac.page.tsx";
 import Header from "./components/Header.component.tsx";
 import { useEffect, useState } from "react";
-
+import Components from "./pages/Components.page.tsx";
 
 const ORBS = [
   {id:"orb1", opacity:1},
@@ -11,8 +11,7 @@ const ORBS = [
   {id:"orb3", opacity:1},
   {id:"orb4", opacity:0.7},
   {id:"orb5", opacity:1},
-]
-
+];
 
 function App() {
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
@@ -36,10 +35,34 @@ function App() {
     return () => window.removeEventListener("scroll", headerShowHideHandler);
   }, [lastScrollY]);
 
+
+    //  DIFFERENCE
+    //function func1 () {
+    //    const name:string|null = import.meta.env.aaaaa;
+
+    //    if (!name) return;
+
+    //    function func2 () {
+    //        const charArr = name.split("");
+    //        console.log(charArr);
+    //    }
+    //}
+    //const func3 = () => {
+    //    const name:string|null = import.meta.env.aaaaa;
+
+    //    if (!name) return;
+
+    //    const func4 = () => {
+    //        const charArr = name.split("");
+    //        console.log(charArr);
+    //    }
+    //}
+
+
   return (
     <BrowserRouter>
       <Header isHeaderVisible={isHeaderVisible} />
-      <div className="gradient_background fixed inset-0 -z-2 overflow-hidden">
+      {/*<div className="gradient_background fixed inset-0 -z-2 overflow-hidden">
         <svg xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <filter id="goo">
@@ -55,12 +78,13 @@ function App() {
               <div key={id} className={`${id} ${opacity} absolute`}></div>
             ))
           }
-            {/*<div ref={interBubbleRef} id="interactive" className="interactive"></div>*/}
+            <div ref={interBubbleRef} id="interactive" className="interactive"></div>
         </div>
-      </div>
+      </div>*/}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/prac" element={<Prac />} />
+        <Route path="/components" element={<Components />} />
       </Routes>
     </BrowserRouter>
   )
