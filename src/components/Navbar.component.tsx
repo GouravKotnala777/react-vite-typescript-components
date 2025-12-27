@@ -1,14 +1,30 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { NavLink } from "react-router-dom";
 
 interface NavbarPropTypes{
-    navlinks:{icon:string; text:string;}[];
+    navItems:{
+        iconPath: string;
+        text: string;
+        url: string;
+    }[];
     fontSize?:string;
     padding?:string;
     previewGap?:string;
     borderRadius?:string;
 };
 
-function Navbar({navlinks, fontSize="18px", padding="0px 0px", previewGap="-48px", borderRadius="0px"}:NavbarPropTypes) {
+const IconHandler = (text:string, iconPath:string) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-10 -10 44 44" stroke-width="1.5"  data-nav-item={text} className="stroke-1 stroke-gray-400 mix-blend-difference w-full h-full"
+    style={{
+        transition:"1s ease-in-out"
+    }}
+>
+  <path  data-nav-item={text} stroke-linecap="round"
+        stroke-linejoin="round"
+        d={iconPath}
+    />
+</svg>;
+
+function Navbar({navItems, fontSize="18px", padding="0px 0px", previewGap="-48px", borderRadius="0px"}:NavbarPropTypes) {
     const[hoveringNav, setHoveringNav] = useState<{x:number; width:number; left:number;}>({x:0, width:0, left:0});
     const [hoveringNavText, setHoveringNavText] = useState<string>("");
     const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -79,7 +95,7 @@ function Navbar({navlinks, fontSize="18px", padding="0px 0px", previewGap="-48px
                         }}
                     >
                         {
-                            navlinks.map(({text}, index) => (
+                            navItems.map(({text}, index) => (
                                 <div key={index} className="transition-all ease duration-600 bg-gray-800 text-gray-200"
                                     style={{
                                         transform:hoveringNavText === text?"scale(1)":"scale(0.5)",
@@ -97,16 +113,16 @@ function Navbar({navlinks, fontSize="18px", padding="0px 0px", previewGap="-48px
                     }}
                     className="flex overflow-hidden">
                     {
-                        navlinks.map(({icon, text}, index) => (
-                            <div key={index} className="h-full cursor-pointer flex items-center relative transition-all ease-in-out duration-600 hover:bg-gray-800"
+                        navItems.map(({iconPath, text, url}, index) => (
+                            <NavLink key={index} to={url} className="h-full cursor-pointer flex items-center relative transition-all ease-in-out duration-600 hover:bg-gray-800"
                                 style={{
                                     padding,
                                     scale:(hoveringNavText === text)?1:0.9
                                 }}
                             >
                                 <div className="text-gray-300">{text}</div>
-                                <div data-nav-item={text} className="backdrop-blur-md absolute left-0 top-0 h-full w-full text-center content-center">{icon}</div>
-                            </div>
+                                <div data-nav-item={text} className="backdrop-blur-md absolute left-0 top-0 h-full w-full text-center content-center">{IconHandler(text, iconPath)}</div>
+                            </NavLink>
                         ))
                     }
                 </div>

@@ -81,6 +81,10 @@ body{
     /*filter: url(#goo) blur(55px);*/
     /*filter: url(#goo);*/
 }
+.apply_goo_effect{
+    /*filter: url(#goo) blur(55px);*/
+    filter: url(#goo);
+}
 
 .orb1{
     width: var(--circle-size);
