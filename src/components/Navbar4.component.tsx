@@ -119,12 +119,12 @@ function Navbar4({navItems, paddingX="32px", paddingY="10px"}:Navbar4PropTypes) 
                                         padding:`${paddingY} ${paddingX}`
                                     }}
                                 >{text}</div>
-                                <NavLink to={url} className="absolute left-0 h-full w-full text-center content-center cursor-default"
+                                <div className="absolute left-0 h-full w-full text-center content-center cursor-default"
                                     style={{
                                         top:`-${paddingY}`
                                     }}
-                                >{IconHandler(iconPath)}</NavLink>
-                                <div data-nav-item={text} className="absolute top-0 left-0 w-full h-full opacity-0">{text}</div>
+                                >{IconHandler(iconPath)}</div>
+                                <NavLink to={url} data-nav-item={text} className="absolute top-0 left-0 w-full h-full opacity-0">{text}</NavLink>
                             </div>
                         ))
                     }

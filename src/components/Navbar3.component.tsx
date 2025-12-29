@@ -1,4 +1,5 @@
 import { useRef, useState, type MouseEvent } from "react";
+import { NavLink } from "react-router-dom";
 
 interface Navbar3PropTypes{
     blobCurvature?:string;
@@ -66,7 +67,7 @@ function Navbar3({blobCurvature="2px", navItems, blobSize="44px", blobY="middle"
                 onMouseOut={() => setHoveredNav("")}
             >
                 {
-                    navItems.map(({iconPath, text}) => (
+                    navItems.map(({iconPath, text, url}) => (
                         <div key={text} className="border border-gray-200 overflow-hidden text-gray-500 hover:text-gray-300 dark:hover:text-gray-300 relative cursor-default transition-all duration-700 ease-in-out rounded-md hover:scale-115"
                         >
                             <div className="opacity-0">{text}</div>
@@ -92,7 +93,7 @@ function Navbar3({blobCurvature="2px", navItems, blobSize="44px", blobY="middle"
                                 }}
                             ></div>
                             <div className="absolute top-0 left-0 inset-0 text-center">{IconHandler(iconPath)}</div>
-                            <div data-nav-item={text} className="absolute top-0 left-0 inset-0 text-center opacity-0">{text}</div>
+                            <NavLink to={url} data-nav-item={text} className="absolute top-0 left-0 inset-0 text-center opacity-0">{text}</NavLink>
                         </div>
                     ))
                 }

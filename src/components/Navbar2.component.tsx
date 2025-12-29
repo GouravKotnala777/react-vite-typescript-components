@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 
 interface Navbar2PropTypes{
@@ -53,7 +54,7 @@ function Navbar2({navItems, fontSize="18px", padding="6px 24px"}:Navbar2PropType
         <div>
             <div className="flex w-min mx-auto rounded-md bg-white [box-shadow:0px_0px_8px_0.1px_gray] text-gray-500 dark:bg-gray-800 dark:text-gray-400">
                 {
-                    navItems.map(({iconPath, text}, index) => (
+                    navItems.map(({iconPath, text, url}, index) => (
                         <div className="relative"
                             style={{
                                 fontSize
@@ -107,12 +108,12 @@ function Navbar2({navItems, fontSize="18px", padding="6px 24px"}:Navbar2PropType
                                     />
                                 </svg>*/}
                             </div>
-                            <div data-nav-item={text} className="cursor-default absolute w-full h-full inset-0 text-center content-center text-transparent"
+                            <NavLink to={url} data-nav-item={text} className="cursor-default absolute w-full h-full inset-0 text-center content-center text-transparent"
                                 style={{
                                     padding
                                 }}
                             >{text}
-                            </div>
+                            </NavLink>
                         </div>
                     ))
                 }
