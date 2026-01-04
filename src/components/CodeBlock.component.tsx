@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import Prism from "prismjs";
-import "../styles/prism-custom-dracula.css";
+import "../styles/prism-custom-theme.css";
 import "prismjs/components/prism-jsx";
 
 

@@ -1,0 +1,69 @@
+/* prism-custom-dracula.css */
+
+pre[class*="language-"] {
+  color: white;
+}
+pre[class]
+
+/* Comments */
+.token.comment {
+  color: #6272a4;
+  font-style: italic;
+}
+
+/* Keywords (const, return, etc.) */
+.token.keyword {
+  /*color: oklch(58.8% 0.158 241.966);*/
+  color: #298dc7;
+}
+
+/* Strings */
+.token.string {
+  color: #ffb900;
+}
+
+/* Numbers */
+.token.number {
+  color: #fefce8;
+}
+
+/* Functions */
+.token.function {
+  color: #fff085;
+}
+
+/* Variables */
+.token.variable {
+  color: #8be9fd;
+}
+
+/* Operators */
+.token.operator {
+  color: #ff79c6;
+}
+
+/* JSX TAGS <div> */
+.token.tag {
+  color: #298dc7;
+}
+
+/* JSX tag names (div, span, Input) */
+.token.tag .token.tag-name {
+  color: red;
+}
+
+/* JSX attributes (className, width) */
+.token.attr-name {
+  color: #8be9fd;
+}
+
+/* JSX attribute values */
+.token.attr-value,
+.token.attr-value .token.punctuation {
+  color: #ffb900;
+}
+
+/* JSX punctuation: < > / = */
+.token.punctuation {
+  color: white;
+}
