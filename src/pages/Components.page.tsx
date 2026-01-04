@@ -8,6 +8,36 @@ import BorderGradientAnimation from "../components/BorderGradientAnimation.compo
 import Navbar2 from "../components/Navbar2.component";
 import Navbar3 from "../components/Navbar3.component";
 import Navbar4 from "../components/Navbar4.component";
+import Input from "../components/Input.component";
+import CodeBlock from "../components/CodeBlock.component";
+import Tab from "../components/Tab.component";
+
+//const CODE_ICON = () => {
+//    return(<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+//        <path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
+//    </svg>)
+//}
+const CODE_ICON = () => {
+    return(
+        <path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z" />
+    )
+}
+const PREVIEW_ICON = () => {
+    return (
+        <>
+            <path d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
+            <path d="M6 8h.01"></path>
+            <path d="M9 8h.01"></path>
+        </>
+    )
+}
+//const PREVIEW_ICON = () => {
+//    return(<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="h-4 w-4">
+//        <path d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path>
+//        <path d="M6 8h.01"></path>
+//        <path d="M9 8h.01"></path>
+//    </svg>)
+//}
 
 
 const NAVITEMS:{
@@ -22,11 +52,80 @@ const NAVITEMS:{
     {iconPath:"M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9", text:"Signout", url:"/signout"}
 ];
 
+const code = `
+    // comment
+    const num = 10;
+    function test() {
+        return "Hello";
+    }
+`;
+const code2 = `
+    <div className="border border-blue-500">
+        <div className="border border-red-500 h-20 w-50">
+            <Input />
+        </div>
+        <div className="border border-red-500 h-20 w-100">
+            <Input width="210px" />
+        </div>
+        <div className="border border-red-500 h-20 w-150">
+            <Input width="260px" />
+        </div>
+        <div className="border border-red-500 h-20 w-200">
+            <Input width="310px" />
+        </div>
+    </div>
+`
+//const highlight = (code, language="markup") => {
+//    return Prism.highlight(code, Prism.languages[language], language)
+//}
 
 function Components() {
     
     return(
         <section className="max-w-3xl mx-auto min-h-screen mt-30 px-4">
+
+
+            <h2 className="text-2xl font-semibold mt-10">Input</h2>
+            <p className="tracking-normal leading-7 text-gray-600 dark:text-gray-200">A stylish dark mode supported navbar component-</p>
+
+            <Tab
+                panels={[
+                    {
+                        tabIconPath:PREVIEW_ICON(),
+                        tabName:"Preview",
+                        content:(
+                            <div className="h-80 flex justify-center items-center">
+                                <Input />
+                            </div>
+                        )
+                    },
+                    {
+                        tabIconPath:CODE_ICON(),
+                        tabName:"Code",
+                        content:<CodeBlock code={code2} language="jsx" />
+                    }
+                ]}
+            />
+
+            <div className="border border-blue-500">
+                <div className="border border-red-500 h-20 w-50">
+                    <Input />
+                </div>
+                <div className="border border-red-500 h-20 w-100">
+                    <Input width="210px" />
+                </div>
+                <div className="border border-red-500 h-20 w-150">
+                    <Input width="260px" />
+                </div>
+                <div className="border border-red-500 h-20 w-200">
+                    <Input width="310px" />
+                </div>
+            </div>
+
+
+{/*<dialog>
+
+
             <svg xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter id="goo">
@@ -36,6 +135,7 @@ function Components() {
                     </filter>
                 </defs>
             </svg>
+
             <h2 className="text-2xl font-semibold mt-10">Navbar</h2>
             <p className="tracking-normal leading-7 text-gray-600 dark:text-gray-200">A stylish dark mode supported navbar component-</p>
 
@@ -191,6 +291,7 @@ function Components() {
                     comment="{ child:{...} , width:'300px' , height:'200px' , gradient:{['#000', '#fff', '#000']} , backgroundColor:'white' , thickness:'3px' , borderRadius:'8px' , blur:'7px' , duration:3000 }"
                 />
             </div>
+</dialog>*/}
 
         </section>
     )
