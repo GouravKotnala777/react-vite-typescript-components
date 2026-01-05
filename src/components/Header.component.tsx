@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { MoonSVG, SunSVG } from "./TextPanel.component";
 import "../index.css";
 import { NavLink } from "react-router-dom";
+import useTheme from "../hooks/useTheme";
 
 interface HeaderPropType{
     isHeaderVisible:boolean;
 };
 
 function Header({isHeaderVisible}:HeaderPropType) {
-    const [theme, setTheme] = useState<"light"|"dark">("light");
+    const {theme, setTheme} = useTheme();
 
 
     useEffect(() => {
