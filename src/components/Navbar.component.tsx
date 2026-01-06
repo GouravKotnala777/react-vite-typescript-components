@@ -124,7 +124,6 @@ function Navbar({navItems, fontSize="18px", padding="0px 0px", previewGap="-48px
                                 <div className="backdrop-blur-md absolute left-0 top-0 h-full w-full text-center content-center rounded-md transition-all ease-in-out duration-600"
                                     style={{
                                         scale:(hoveringNavText === text)?1:0.9,
-                                        //borderRadius:(hoveringNavText === text)?borderRadius:0
                                         borderRadius:(index === 0)?
                                             `${borderRadius} 0 0 ${borderRadius}`
                                             :

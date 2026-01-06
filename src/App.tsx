@@ -5,13 +5,13 @@ import Header from "./components/Header.component.tsx";
 import { useEffect, useState } from "react";
 import Components from "./pages/Components.page.tsx";
 
-const ORBS = [
-  {id:"orb1", opacity:1},
-  {id:"orb2", opacity:1},
-  {id:"orb3", opacity:1},
-  {id:"orb4", opacity:0.7},
-  {id:"orb5", opacity:1},
-];
+//const ORBS = [
+//  {id:"orb1", opacity:1},
+//  {id:"orb2", opacity:1},
+//  {id:"orb3", opacity:1},
+//  {id:"orb4", opacity:0.7},
+//  {id:"orb5", opacity:1},
+//];
 
 function App() {
   const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
@@ -62,8 +62,8 @@ function App() {
   return (
     <BrowserRouter>
       <Header isHeaderVisible={isHeaderVisible} />
-      {/*<div className="gradient_background fixed inset-0 -z-2 overflow-hidden">
-        <svg xmlns="http://www.w3.org/2000/svg">
+      <div className="gradient_background fixed inset-0 -z-2 overflow-hidden">
+        {/*<svg xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <filter id="goo">
                     <feGaussianBlur in="sourceGraphic" stdDeviation="10" result="blur" />
@@ -79,8 +79,8 @@ function App() {
             ))
           }
             <div ref={interBubbleRef} id="interactive" className="interactive"></div>
-        </div>
-      </div>*/}
+        </div>*/}
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/prac" element={<Prac />} />
