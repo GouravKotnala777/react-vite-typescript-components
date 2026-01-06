@@ -31,10 +31,10 @@ function CodeBlock({code, language}:CodeBlockPropTypes) {
     }, [code]);
 
     return(
-        <div className="flex max-h-[300px] text-sm overflow-auto">
+        <div className="flex max-h-[300px] text-sm overflow-auto rounded-bl-md thin_scrollbar">
   
             {/* Line numbers */}
-            <div className="h-max select-none text-right pr-4 pl-3 bg-gray-200 text-gray-500 dark:bg-gray-800">
+            <div className="h-full select-none sticky top-0 left-0 text-right pr-4 pl-3 pb-4 bg-gray-200 text-gray-500 dark:bg-gray-800">
                 <GenerateLines code={code} />
             </div>
 
@@ -42,7 +42,7 @@ function CodeBlock({code, language}:CodeBlockPropTypes) {
             <pre className="">
                 <code
                     ref={preRef}
-                    className={`language-${language} whitespace-pre`}
+                    className={`language-${language} whitespace-pre leading-6`}
                 >
                     {code}
                 </code>

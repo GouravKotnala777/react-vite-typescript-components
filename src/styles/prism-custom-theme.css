@@ -1,5 +1,25 @@
 /* prism-custom-dracula.css */
 
+
+:root{
+  --keyword-color:#005282;
+  --tag-color:#0182cc;
+  --punctuation-color:rgb(99, 99, 99);
+  --operator-color:black;
+  --attr-value-color:#e69900;
+  --attr-name-color:#41ccec;
+  /*--variable-color:#e69900;*/
+}
+
+:root[class="dark"]{
+  --keyword-color:#298dc7;
+  --tag-color:#2a92ce;
+  --punctuation-color:rgb(185, 185, 185);
+  --operator-color:#fefce8;
+  --attr-value-color:#ffb900;
+  --attr-name-color:#41ccec;
+}
+
 pre[class*="language-"] {
   color: white;
 }
@@ -14,7 +34,7 @@ pre[class]
 /* Keywords (const, return, etc.) */
 .token.keyword {
   /*color: oklch(58.8% 0.158 241.966);*/
-  color: #298dc7;
+  color: var(--keyword-color);
 }
 
 /* Strings */
@@ -39,31 +59,47 @@ pre[class]
 
 /* Operators */
 .token.operator {
-  color: #ff79c6;
+  color: var(--operator-color);
 }
 
 /* JSX TAGS <div> */
 .token.tag {
-  color: #298dc7;
+  color: var(--tag-color);
 }
 
 /* JSX tag names (div, span, Input) */
-.token.tag .token.tag-name {
+.token.tag-name {
   color: red;
 }
 
 /* JSX attributes (className, width) */
 .token.attr-name {
-  color: #8be9fd;
+  color: var(--attr-name-color);
 }
 
 /* JSX attribute values */
-.token.attr-value,
-.token.attr-value .token.punctuation {
-  color: #ffb900;
+.token.attr-value {
+  color: var(--attr-value-color);
 }
 
 /* JSX punctuation: < > / = */
 .token.punctuation {
-  color: white;
+  color: var(--punctuation-color);
+}
+
+
+.thin_scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.thin_scrollbar::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 9999px;
+}
+
+/* Firefox */
+.thin_scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af transparent;
 }
