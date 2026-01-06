@@ -100,7 +100,8 @@ function Navbar({navItems, fontSize="18px", padding="0px 0px", previewGap="-48px
                                     style={{
                                         transform:hoveringNavText === text?"scale(1)":"scale(0.5)",
                                         filter:hoveringNavText === text?"blur(0)":"blur(7px)",
-                                        padding
+                                        padding,
+                                        borderRadius
                                     }}
                                 >{text}</div>
                             ))
@@ -116,12 +117,25 @@ function Navbar({navItems, fontSize="18px", padding="0px 0px", previewGap="-48px
                         navItems.map(({iconPath, text, url}, index) => (
                             <NavLink key={index} to={url} className="h-full cursor-pointer flex items-center relative transition-all ease-in-out duration-600 hover:bg-gray-800"
                                 style={{
-                                    padding,
-                                    scale:(hoveringNavText === text)?1:0.9
+                                    padding
                                 }}
                             >
                                 <div className="text-gray-300">{text}</div>
-                                <div data-nav-item={text} className="backdrop-blur-md absolute left-0 top-0 h-full w-full text-center content-center">{IconHandler(text, iconPath)}</div>
+                                <div className="backdrop-blur-md absolute left-0 top-0 h-full w-full text-center content-center rounded-md transition-all ease-in-out duration-600"
+                                    style={{
+                                        scale:(hoveringNavText === text)?1:0.9,
+                                        //borderRadius:(hoveringNavText === text)?borderRadius:0
+                                        borderRadius:(index === 0)?
+                                            `${borderRadius} 0 0 ${borderRadius}`
+                                            :
+                                            (index === navItems.length-1)?
+                                                `0 ${borderRadius} ${borderRadius} 0`
+                                                :
+                                                "0"
+                                    }}
+
+                                >{IconHandler(text, iconPath)}</div>
+                                <div data-nav-item={text} className="backdrop-blur-md absolute left-0 top-0 h-full w-full text-center content-center opacity-0">A</div>
                             </NavLink>
                         ))
                     }
