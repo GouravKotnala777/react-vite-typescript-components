@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent, type
 interface InputPropTypes{
     width?:string;
     height?:string;
+    themeToggler?:boolean;
     wave?:{
         amplitude:number;
         cycles:number;
@@ -14,7 +15,7 @@ interface InputPropTypes{
 };
 
 let timer = 0;
-function Input({width="160px", height="40px", wave={amplitude:4, cycles:10, numOfParticles:500, particleSize:0.6, smokeEffect:false}}:InputPropTypes) {
+function Input({width="160px", height="40px", themeToggler=false, wave={amplitude:4, cycles:10, numOfParticles:500, particleSize:0.6, smokeEffect:false}}:InputPropTypes) {
     const canvasRef = useRef<HTMLCanvasElement|null>(null);
     const boxRef = useRef<HTMLDivElement|null>(null);
     const inputRef = useRef<HTMLInputElement|null>(null);
@@ -35,7 +36,7 @@ function Input({width="160px", height="40px", wave={amplitude:4, cycles:10, numO
         }
         else{
             const caret = document.createElement("span");
-            caret.className = "h-full border border-black animate-pulse";
+            caret.className = "h-full border border-black dark:border-white animate-pulse";
             caret.id = "caret";
             const childNextToCaretPosition = visualBox.children[caretPosition];
             if (childNextToCaretPosition) {
@@ -108,7 +109,7 @@ function Input({width="160px", height="40px", wave={amplitude:4, cycles:10, numO
                     p.potential -= 0.01;
                 }
                 
-                ctx.fillStyle = `rgba(0, 0, 0, ${1-Math.abs(p.opacity)})`;
+                ctx.fillStyle = themeToggler?`rgba(255, 255, 255, ${1-Math.abs(p.opacity)})`:`rgba(0, 0, 0, ${1-Math.abs(p.opacity)})`;
                 ctx.beginPath();
                 ctx.arc(
                     p.x,
@@ -261,7 +262,7 @@ function Input({width="160px", height="40px", wave={amplitude:4, cycles:10, numO
 
     
     return(
-        <div className="border border-gray-800 w-max flex text-gray-600 dark:border-gray-200 dark:text-gray-100 rounded-sm overflow-hidden pl-1">
+        <div className="border border-gray-800 w-max flex text-gray-600 dark:border-gray-700 dark:text-gray-100 rounded-sm overflow-hidden pl-1">
             <div className="relative"
                 style={{
                     width, height

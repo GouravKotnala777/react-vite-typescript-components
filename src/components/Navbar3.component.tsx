@@ -14,7 +14,7 @@ interface Navbar3PropTypes{
 };
 
 const IconHandler = (iconPath:string) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-2.5 -2.5 30 30" stroke-width="1.5"
-    className="stroke-1 stroke-gray-400 mix-blend-difference w-full h-full"
+    className="stroke-1 stroke-gray-400 w-full h-full"
     style={{
         transition:"1s ease-in-out"
     }}
@@ -61,44 +61,17 @@ function Navbar3({blobCurvature="2px", navItems, blobSize="44px", blobY="middle"
     
     return(
         <div ref={sectionRef} className="relative w-max mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="goo">
+                        <feGaussianBlur in="sourceGraphic" stdDeviation="10" result="blur" />
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                        <feBlend in="sourceGraphic" in2="goo" />
+                    </filter>
+                </defs>
+            </svg>
         
-            <div className="flex gap-20"
-                onMouseOver={mouseOverHandler}
-                onMouseOut={() => setHoveredNav("")}
-            >
-                {
-                    navItems.map(({iconPath, text, url}) => (
-                        <div key={text} className="border border-gray-200 overflow-hidden text-gray-500 hover:text-gray-300 dark:hover:text-gray-300 relative cursor-default transition-all duration-700 ease-in-out rounded-md hover:scale-115"
-                        >
-                            <div className="opacity-0">{text}</div>
-                            <div className="bg-gray-800 absolute inset-0"
-                                style={{
-                                    transform:(hoveredNav === text&&blobPrevPos === "left")?"scaleX(1)":"scaleX(0)",
-                                    transformOrigin:"left",
-                                    transition:"0.5s ease-in-out"
-                                }}
-                            ></div>
-                            <div className="bg-gray-800 absolute inset-0"
-                                style={{
-                                    transform:(hoveredNav === text&&blobPrevPos === "right")?"scaleX(1)":"scaleX(0)",
-                                    transformOrigin:"right",
-                                    transition:"0.5s ease-in-out"
-                                }}
-                            ></div>
-                            <div className="bg-gray-800 absolute inset-0"
-                                style={{
-                                    transform:(hoveredNav === text&&blobPrevPos === null)?"scaleY(1)":"scaleY(0)",
-                                    transformOrigin:"bottom",
-                                    transition:"0.5s ease-in-out"
-                                }}
-                            ></div>
-                            <div className="absolute top-0 left-0 inset-0 text-center">{IconHandler(iconPath)}</div>
-                            <NavLink to={url} data-nav-item={text} className="absolute top-0 left-0 inset-0 text-center opacity-0">{text}</NavLink>
-                        </div>
-                    ))
-                }
-
-            </div>
+            
             <div className="apply_goo_effect absolute left-0 w-full h-full"
                 style={{
                     top:blobTop
@@ -141,6 +114,46 @@ function Navbar3({blobCurvature="2px", navItems, blobSize="44px", blobY="middle"
                         ))
                     }
                 </div>
+            </div>
+
+
+
+            <div className="flex gap-20"
+                onMouseOver={mouseOverHandler}
+                onMouseOut={() => setHoveredNav("")}
+            >
+                {
+                    navItems.map(({iconPath, text, url}) => (
+                        <div key={text} className="border border-gray-200 dark:border-gray-700 overflow-hidden text-gray-500 hover:text-gray-300 dark:hover:text-gray-300 relative cursor-default transition-all duration-700 ease-in-out rounded-md hover:scale-115"
+                        >
+                            <div className="opacity-0">{text}</div>
+                            <div className="bg-gray-800 dark:bg-gray-200 absolute inset-0"
+                                style={{
+                                    transform:(hoveredNav === text&&blobPrevPos === "left")?"scaleX(1)":"scaleX(0)",
+                                    transformOrigin:"left",
+                                    transition:"0.5s ease-in-out"
+                                }}
+                            ></div>
+                            <div className="bg-gray-800 dark:bg-gray-200 absolute inset-0"
+                                style={{
+                                    transform:(hoveredNav === text&&blobPrevPos === "right")?"scaleX(1)":"scaleX(0)",
+                                    transformOrigin:"right",
+                                    transition:"0.5s ease-in-out"
+                                }}
+                            ></div>
+                            <div className="bg-gray-800 dark:bg-gray-200 absolute inset-0"
+                                style={{
+                                    transform:(hoveredNav === text&&blobPrevPos === null)?"scaleY(1)":"scaleY(0)",
+                                    transformOrigin:"bottom",
+                                    transition:"0.5s ease-in-out"
+                                }}
+                            ></div>
+                            <div className="absolute top-0 left-0 inset-0 text-center">{IconHandler(iconPath)}</div>
+                            <NavLink to={url} data-nav-item={text} className="absolute top-0 left-0 inset-0 text-center opacity-0">{text}</NavLink>
+                        </div>
+                    ))
+                }
+
             </div>
         </div>
     )

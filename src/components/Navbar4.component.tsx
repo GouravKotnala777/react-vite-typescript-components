@@ -13,7 +13,17 @@ const IconHandler = (iconPath:string) => <svg xmlns="http://www.w3.org/2000/svg"
     />
 </svg>;
 
-
+const GooFilter = () => (
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="sourceGraphic" stdDeviation="10" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                <feBlend in="sourceGraphic" in2="goo" />
+            </filter>
+        </defs>
+    </svg>
+);
 
 interface Navbar4PropTypes{
     navItems:{
@@ -23,9 +33,10 @@ interface Navbar4PropTypes{
     }[];
     paddingX?:string;
     paddingY?:string;
+    marginTop?:string;
 };
 
-function Navbar4({navItems, paddingX="32px", paddingY="10px"}:Navbar4PropTypes) {
+function Navbar4({navItems, paddingX="32px", paddingY="10px", marginTop="0px"}:Navbar4PropTypes) {
     const parentSectionRef = useRef<HTMLElement|null>(null);
     const [hoveringNav, setHoveringNav] = useState("");
 
@@ -45,7 +56,12 @@ function Navbar4({navItems, paddingX="32px", paddingY="10px"}:Navbar4PropTypes) 
 
 
     return(
-        <section ref={parentSectionRef} className="max-w-3xl mx-auto min-h-screen mt-30 px-4">
+        <section ref={parentSectionRef} className="max-w-3xl mx-auto min-h-screen px-4"
+            style={{
+                marginTop
+            }}
+        >
+            {GooFilter()}
             <div className="relative w-min mx-auto">
                 <div className="absolute top-0 left-0 w-full h-full">
                     <div className="relative">
