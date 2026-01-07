@@ -24,3 +24,11 @@ export const NAVBAR4_CODE = `
         <Navbar4 navItems={NAVITEMS} marginTop="320px" />
     </div>
 `;
+export const TEXT_STAGGERED = `
+    <>
+        <div className="h-80 flex flex-col justify-around items-center">
+            <TextStaggered text="Staggered Text" fontWeight="bold" />
+        </div>
+        <p className="text-center text-gray-500 dark:text-gray-400">Hover me</p>
+    </>
+`;
