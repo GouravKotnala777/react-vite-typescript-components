@@ -1,10 +1,13 @@
-import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type Dispatch, type FocusEvent, type KeyboardEvent, type MouseEvent, type SetStateAction } from "react";
 
 
 interface InputPropTypes{
-    width?:string;
+    fontSize?:"text-xs"|"text-sm"|"text-md"|"text-lg"|"text-xl"|"text-2xl";
+    fontWeight?:"font-thin"|"font-normal"|"font-semibold"|"font-bold"|"font-extrabold";
+    className?:string;
     height?:string;
     themeToggler?:boolean;
+    btnIconPathD?:string;
     wave?:{
         amplitude:number;
         cycles:number;
@@ -12,19 +15,53 @@ interface InputPropTypes{
         particleSize:number;
         smokeEffect:boolean;
     };
+    placeHolder?:string;
+    manuallyStartAnimation?:boolean;
+    setData:Dispatch<SetStateAction<string>>;
+    onClick?:(e:MouseEvent<HTMLInputElement>)=>void;
+    onChange?:(e:ChangeEvent<HTMLInputElement>)=>void;
+    onFocus?:(e:FocusEvent<HTMLInputElement>)=>void;
+    onBlur?:(e:FocusEvent<HTMLInputElement>)=>void;
+    onKeyUp?:(e:KeyboardEvent<HTMLInputElement>)=>void;
+    onKeyDown?:(e:KeyboardEvent<HTMLInputElement>)=>void;
 };
 
 let timer = 0;
-function Input({width="160px", height="40px", themeToggler=false, wave={amplitude:4, cycles:10, numOfParticles:500, particleSize:0.6, smokeEffect:false}}:InputPropTypes) {
+function Input({btnIconPathD="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z", fontSize="text-lg", fontWeight="font-normal", manuallyStartAnimation, placeHolder="", setData, height="40px", themeToggler=false, wave={amplitude:4, cycles:10, numOfParticles:800, particleSize:0.6, smokeEffect:false},
+    onClick, onChange, onFocus, onBlur, onKeyUp, onKeyDown
+}:InputPropTypes) {
     const canvasRef = useRef<HTMLCanvasElement|null>(null);
     const boxRef = useRef<HTMLDivElement|null>(null);
+    const placeHolderRef = useRef<HTMLDivElement|null>(null);
     const inputRef = useRef<HTMLInputElement|null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isPlaceHolderVisible, setIsPlaceHolderVisible] = useState(true);
     const [isBoxCanvasEqualWidth, setIsBoxCanvasEqualWidth] = useState(false);
     
+
+    function createPlaceHolder() {        
+        const placeHolderElem = placeHolderRef.current;
+
+        if (!placeHolderElem) return;
+
+        for (const c of placeHolder){
+            const spanElem = document.createElement("span");
+            spanElem.textContent = c;
+            spanElem.style.color = "#cccccc";
+            placeHolderElem.appendChild(spanElem);
+        };        
+    };
+    function showPlaceHolder() {
+        setIsPlaceHolderVisible(true);
+    };
+    function hidePlaceHolder() {
+        setIsPlaceHolderVisible(false);
+    };
+
     function createInputCaret(visualBox:HTMLDivElement, caretPosition:number) {
-        const isCaretExist = document.getElementById("caret");        
-        if (isCaretExist) {
+        const isCaretExist = document.getElementById("caret");
+        hidePlaceHolder();
+        if (isCaretExist) {            
             visualBox.removeChild(isCaretExist);
             const childNextToCaretPosition = visualBox.children[caretPosition];
             if (childNextToCaretPosition) {
@@ -36,9 +73,9 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
         }
         else{
             const caret = document.createElement("span");
-            caret.className = "h-full border border-black dark:border-white animate-pulse";
+            caret.className = "h-[75%] border border-black dark:border-white animate-pulse";
             caret.id = "caret";
-            const childNextToCaretPosition = visualBox.children[caretPosition];
+            const childNextToCaretPosition = visualBox.children[caretPosition];            
             if (childNextToCaretPosition) {
                 visualBox.insertBefore(caret, childNextToCaretPosition);
             }
@@ -46,7 +83,7 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
                 visualBox.appendChild(caret);
             }
         }
-    }
+    };
 
     const createDust = () => {
         let particles:{size:number; x:number; y:number; velX:number; velY:number; acc:number; opacity:number; del:number; potential:number;}[] = [];
@@ -114,7 +151,7 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
                 ctx.arc(
                     p.x,
                     p.y,
-                    (smokeEffect?Math.abs(p.size*p.opacity*30):0.6),
+                    (smokeEffect?Math.abs(p.size*p.opacity*30):particleSize),
                     0, Math.PI*2
                 );
                 ctx.fill();
@@ -150,7 +187,7 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
         const data = inputEvent.data;
         const type = inputEvent.inputType;
 
-        
+        setData(e.target.value);
         
         if (boxElem.getBoundingClientRect().width >= inputElem.getBoundingClientRect().width) {
             setIsBoxCanvasEqualWidth(true);
@@ -193,7 +230,7 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
             boxElem.insertBefore(nextElem, caret);
         }
         else if (key === "Backspace") {
-            const preElem = caret.previousSibling;            
+            const preElem = caret.previousSibling;
             
             if (preElem) {
                 boxElem.removeChild(preElem);
@@ -212,7 +249,7 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
             const spanElem = document.createElement("span");
             spanElem.textContent = " ";
             spanElem.className = "w-1 inline-block";
-            boxElem.insertBefore(spanElem, document.getElementById("caret"));       
+            boxElem.insertBefore(spanElem, document.getElementById("caret"));
         }
         else if(key.length === 1){
             const spanElem = document.createElement("span");
@@ -220,9 +257,9 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
             boxElem.insertBefore(spanElem, document.getElementById("caret"));
         }        
         else{
-            console.log("not printable key");
+            throw Error("not printable key");
         }        
-    }
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -238,11 +275,16 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
         canvas.width = rect.width;
         canvas.height = rect.height;
     }, []);
+
+    useEffect(() => {
+        createPlaceHolder();
+    }, []);
     
 
     function clickInputHandler(e:MouseEvent<HTMLInputElement>){
         const caretPosition = e.currentTarget.selectionStart;
         clearTimeout(timer);
+        
         if (caretPosition){
             createInputCaret(boxRef.current as HTMLDivElement, caretPosition);
         }
@@ -258,27 +300,70 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
     function blurInputHandler(){
         const caret = document.getElementById("caret");
         caret?.remove();
+        if (boxRef.current?.children.length===0) {
+            showPlaceHolder();
+        }
     };
 
+    useEffect(() => {
+        if (manuallyStartAnimation) {
+            const caret = document.getElementById("caret");
+            if (!caret) return;
+            setIsLoading(true);
+            createDust();
+            caret.remove();            
+        }
+    }, [manuallyStartAnimation]);
     
     return(
-        <div className="border border-gray-800 w-max flex text-gray-600 dark:border-gray-700 dark:text-gray-100 rounded-sm overflow-hidden pl-1">
-            <div className="relative"
+        <div className="border border-gray-800 w-full flex text-gray-600 dark:border-gray-700 dark:text-gray-100 rounded-sm overflow-hidden pl-1">
+            <div className="relative w-full"
                 style={{
-                    width, height
+                    height
                 }}
             >
                 <canvas ref={canvasRef} className={`absolute top-0 ${isBoxCanvasEqualWidth?"right-0":"left-0"}`}></canvas>
-                <div ref={boxRef} className={`absolute top-0 ${isBoxCanvasEqualWidth?"right-0":"left-0"} h-full content-center text-lg`}></div>
 
+                <div id="boxRef" data-set="box" ref={boxRef} className={`${fontSize} ${fontWeight} absolute top-0 ${isBoxCanvasEqualWidth?"right-0":"left-0"} flex items-center h-full overflow-hidden pr-5 content-center ${isPlaceHolderVisible?"opacity-0":"opacity-100"}`}></div>
+                <div id="placeHolderRef" data-set="placeholder" ref={placeHolderRef} className={`${fontSize} ${fontWeight} absolute top-0 h-full w-full content-center ${!isPlaceHolderVisible?"opacity-0":"opacity-100"}`}></div>
 
                 <input ref={inputRef} type="text" placeholder="User Name"
-                    className="absolute top-0 left-0 h-full w-full text-lg opacity-0"
-                    onChange={changeInputHandler}
-                    onKeyDown={keyboardEventHandler}
-                    onFocus={focusInputHandler}
-                    onClick={clickInputHandler}
-                    onBlur={blurInputHandler}
+                    className={`${fontSize} ${fontWeight} absolute top-0 left-0 h-full w-full opacity-0`}
+                    onChange={(e) => {
+                        changeInputHandler(e);
+                        if (onChange) {
+                            onChange(e);
+                        }
+                    }}
+                    onKeyDown={(e) => {
+                        keyboardEventHandler(e);
+                        if (onKeyDown) {
+                            onKeyDown(e);
+                        }
+                    }}
+                    onKeyUp={(e) => {
+                        if (onKeyUp) {
+                            onKeyUp(e);
+                        }
+                    }}
+                    onFocus={(e) => {
+                        focusInputHandler(); 
+                        if (onFocus) {
+                            onFocus(e);
+                        }
+                    }}
+                    onClick={(e) => {
+                        clickInputHandler(e);
+                        if (onClick) {
+                            onClick(e);
+                        }
+                    }}
+                    onBlur={(e) => {
+                        blurInputHandler(); 
+                        if (onBlur) {
+                            onBlur(e);
+                        }
+                    }}
                 />
 
             </div>
@@ -300,7 +385,7 @@ function Input({width="160px", height="40px", themeToggler=false, wave={amplitud
                                     transition:"0.5s ease-in-out"
                                 }}
                             />
-                            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                            <path strokeLinecap="round" strokeLinejoin="round" d={btnIconPathD}
                                 style={{
                                     opacity:isLoading?0:1,
                                     transition:"0.5s ease-in-out"
