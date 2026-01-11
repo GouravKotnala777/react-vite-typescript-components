@@ -8,7 +8,6 @@ interface TextStaggeredPropTypes{
     animationType?:"first"|"second"|"third"|"fourth"|"fifth"|"sixth"|"seventh";
     duration?:0.5|0.7|0.9|1|1.2|1.4;
     staggeringDelay?:0.02|0.03|0.04|0.05|0.08|0.1|0.12|0.14;
-    color?:string;
     fontSize?:string;
     fontWeight?:"lighter"|"light"|"normal"|"bold"|"bolder";
     gap?:"2px"|"4px"|"6px"|"8px"|"10px"|"12px";
@@ -77,7 +76,7 @@ const getAnimationType = (index:number) => ({
     }]
 });
 
-function TextStaggered({text, animationType="first", duration=0.7, staggeringDelay=0.14, fontSize="48px", fontWeight="normal", color="white", gap="2px"}:TextStaggeredPropTypes) {
+function TextStaggered({text, animationType="first", duration=0.7, staggeringDelay=0.14, fontSize="48px", fontWeight="normal", gap="2px"}:TextStaggeredPropTypes) {
     const [characters, setCharacters] = useState<string[]>([]);
     const [isHovering, setIsHovering] = useState<boolean>(false);
 
@@ -96,9 +95,9 @@ function TextStaggered({text, animationType="first", duration=0.7, staggeringDel
             initial="initial"
             whileHover={isHovering?"hover":"initial"}
             style={{
-                color, fontSize, fontWeight
+                fontSize, fontWeight
             }}
-            className="relative w-max"
+            className="relative w-max text-gray-600 dark:text-gray-200"
         >
             <motion.div
                 style={{
