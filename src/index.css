@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-/*--bg-color:#09090b
---secondary-color:#0d9488*/
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+}
 
 @property --move{
     syntax: "<percentage>";
@@ -10,7 +12,6 @@
 }
 
 body{
-    /*background-color: #09090b;*/
 }
 
 .aaaa{
@@ -34,32 +35,6 @@ body{
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root{
-    /*--color-bg1:rgb(24, 0, 36);
-    --color-bg2:rgb(0, 9, 44);*/
-
-    --color1:rgb(34, 88, 168);
-    --color2:rgb(153, 46, 177);
-    --color3:rgb(37, 148, 170);
-    --color4:rgb(167, 36, 36);
-    --color5:rgb(154, 154, 33);
-
-
-    --color1:34, 88, 168;
-    --color2:153, 46, 177;
-    --color3:37, 148, 170;
-    --color4:167, 36, 36;
-    --color5:154, 154, 33;
-
-    /*--color1:18,113,255;
-    --color2:221,74,255;
-    --color3:100,228,255;
-    --color4:200,50,50;
-    --color5:180,180,50;*/
-    --color-interactive:140,100,255;
-    --circle-size:80%;
-    --blending:"hard-light";
-}
 :root[class="light"]{
     --color-bg1:rgb(250, 245, 255);
     --color-bg2:rgb(245, 250, 255);

@@ -94,12 +94,12 @@ pre[class]
 }
 
 .thin_scrollbar::-webkit-scrollbar-thumb {
-  background: #9ca3af;
+  background: #ccd2da;
   border-radius: 9999px;
 }
 
 /* Firefox */
 .thin_scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #9ca3af transparent;
+  scrollbar-color: #ccd2da transparent;
 }
